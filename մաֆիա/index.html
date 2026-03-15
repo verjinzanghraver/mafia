@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="hy">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Մաֆիա Խաղ</title>
+    <link rel="icon" href="./unnamed.webp" type="image/png">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="game-container">
+        <div id="setup-section">
+            <h1>Մաֆիա</h1>
+            <p>Խաղացողների քանակը:</p>
+            <input type="number" id="player-count" min="4" max="20" value="6">
+            <br><br>
+            <button onclick="setupGame()">Սկսել խաղը</button>
+        </div>
+
+        <div id="game-section" style="display:none;">
+            <h2 id="player-title">Խաղացող 1</h2>
+            <div id="role-box" class="hidden-role">?</div>
+
+            <div class="controls">
+                <button id="show-btn" onclick="showRole()">Տեսնել դերը</button>
+                <button id="next-btn" onclick="nextPlayer()" style="display:none;">Փակել և հաջորդը</button>
+            </div>
+        </div>
+        <div id="main-game-screen" style="display:none;">
+            <h2 id="phase-title">Գիշեր է...</h2>
+            <div id="instruction-box"
+                style="padding: 20px; background: #000; border: 2px solid #e74c3c; margin-bottom: 20px; border-radius: 10px;">
+                <p id="instruction-text">Բոլորը փակում են աչքերը:</p>
+            </div>
+
+            <button id="phase-btn" onclick="nextPhase()"
+                style="background-color: #f1c40f; color: #000;">Հաջորդը</button>
+
+            <hr>
+            <h3>Խաղացողների ցուցակ</h3>
+            <ul id="players-list" style="list-style: none; padding: 0;"></ul>
+            <button onclick="location.reload()" style="background-color: #7f8c8d; margin-top: 20px;">Նոր խաղ</button>
+        </div>
+        <div id="finish-section" style="display:none;">
+            <h2>Բոլորը գիտեն իրենց դերերը:</h2>
+            <p>Քաղաքը քնում է, արթնանում է Մաֆիան...</p>
+            <button onclick="location.reload()">Նոր խաղ</button>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+
+</html>

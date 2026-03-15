@@ -1,0 +1,222 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Ավելի մաքուր շրիֆտ */
+}
+
+body {
+    background-color: #121212; /* Ավելի մութ ֆոն */
+    color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    transition: background-color 0.5s ease; /* Սահուն անցում գիշերվա և ցերեկվա միջև */
+}
+
+/* 2. Խաղի Կոնտեյներ */
+.game-container {
+    background-color: #1e1e1e; /* Թեթևակի բաց սև */
+    width: 100%;
+    max-width: 450px; /* Հարմար է հեռախոսների համար */
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Ստվեր խորության համար */
+    padding: 30px;
+    text-align: center;
+    border: 1px solid #333;
+}
+
+/* 3. Վերնագրեր և Տեքստ */
+h1 {
+    color: #e74c3c; /* Մաֆիայի կարմիր */
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+h2, h3 {
+    margin-bottom: 15px;
+    color: #fff;
+    font-weight: 600;
+}
+
+p {
+    margin-bottom: 15px;
+    line-height: 1.5;
+    color: #bbb;
+}
+
+/* 4. Մուտքագրման Դաշտեր (Input) */
+input[type="number"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    background-color: #2c2c2c;
+    border: 2px solid #444;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1.1rem;
+    text-align: center;
+    transition: border-color 0.3s;
+}
+
+input[type="number"]:focus {
+    border-color: #e74c3c; /* Կարմիր եզրագիծ սեղմելիս */
+    outline: none;
+}
+
+/* 5. Կոճակների Ընդհանուր Ոճ (Buttons) */
+button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease; /* Հոյակապ էֆեկտներ մկնիկը վրան պահելիս */
+    margin: 5px;
+    letter-spacing: 1px;
+}
+
+button:hover {
+    transform: translateY(-2px); /* Թեթևակի վերև է բարձրանում */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+button:active {
+    transform: translateY(0); /* Սեղմելիս վերադառնում է տեղը */
+}
+
+/* 6. Կոնկրետ Կոճակների Գույներ */
+/* Սկսել / Շարունակել (Կանաչ) */
+#setup-section button, #show-btn, .revealed-role + button, #next-btn, [onclick*="nextPhase"] {
+    background-color: #27ae60;
+    color: white;
+}
+#setup-section button:hover, #show-btn:hover { background-color: #2ecc71; }
+
+/* Տեսնել դերը (Դեղին) */
+#show-btn {
+    background-color: #f1c40f;
+    color: #2c3e50;
+}
+#show-btn:hover { background-color: #f39c12; }
+
+/* Ավարտել քվեարկությունը (Նարնջագույն) */
+#finish-vote-btn, [onclick*="processVotes"] {
+    background-color: #e67e22 !important;
+    color: white;
+}
+
+/* Գործողությունների կոճակներ (Մաֆիայի կարմիր, Շերիֆի կապույտ) */
+#instruction-text button {
+    opacity: 0.9;
+}
+#instruction-text button:hover {
+    opacity: 1;
+}
+
+/* 7. Դերի Ցուցադրման Տուփ (Role Box) */
+#role-box {
+    width: 100%;
+    height: 150px;
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: bold;
+    border-radius: 12px;
+    transition: all 0.5s ease;
+}
+
+.hidden-role {
+    background-color: #2c3e50;
+    color: #7f8c8d;
+    border: 3px dashed #7f8c8d;
+}
+
+.revealed-role {
+    background-color: #fff;
+    color: #2c3e50;
+    border: 3px solid #e74c3c;
+    box-shadow: 0 0 20px rgba(231, 76, 60, 0.5);
+    animation: popIn 0.3s ease; /* Փոքրիկ անիմացիա բացվելիս */
+}
+
+/* 8. Խաղացողների Ցուցակ */
+#players-list {
+    list-style: none;
+    margin-top: 20px;
+    text-align: left;
+}
+
+#players-list li {
+    background-color: #2c2c2c;
+    padding: 15px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #333;
+    transition: all 0.3s ease;
+}
+
+#players-list li:hover {
+    background-color: #333;
+}
+
+/* 9. Գիշերվա/Ցերեկվա և Հրահանգների Տուփ */
+#instruction-box {
+    background-color: #121212;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #444;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#vote-info {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* 10. Քվեարկության Տողեր (+1/-1) */
+[id^="vote-count-"] {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #f1c40f;
+    margin: 0 10px;
+}
+
+
+
+
+@keyframes popIn {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* 12. Հարմարեցում Մոբայլին (Responsive) */
+@media (max-width: 480px) {
+    .game-container {
+        padding: 20px;
+    }
+    h1 {
+        font-size: 2rem;
+    }
+    #role-box {
+        height: 120px;
+        font-size: 1.5rem;
+    }
+}
